@@ -6,6 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { Repository } from 'typeorm';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService implements OnModuleInit, OnApplicationShutdown {
@@ -24,7 +25,7 @@ export class TasksService implements OnModuleInit, OnApplicationShutdown {
     console.log('🛑 Cerrando recursos del servicio de Tasks...');
   }
 
-  create(task: Partial<Task>): Promise<Task> {
+  create(task: CreateTaskDto): Promise<Task> {
     const newTask = this.taskRepository.create(task);
     return this.taskRepository.save(newTask);
   }
